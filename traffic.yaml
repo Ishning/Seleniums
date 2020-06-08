@@ -1,9 +1,9 @@
 Environment:
-  PRD:
-    DingDingWebHook: ddw
+  env:
+    DingDingWebHook: dwebh1
     https: https
-  PRE:
-    DingDingWebHook: ddw
+  env1:
+    DingDingWebHook: dwebh2
     https: https
 Username:
   name: username
