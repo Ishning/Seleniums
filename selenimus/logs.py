@@ -4,7 +4,9 @@ import time
 import yaml
 
 from logging import handlers
+from logging import config
 
+#内建logging配置
 class Logger:
     _logger_level={
         'DEBUG':logging.DEBUG,
@@ -57,8 +59,20 @@ class Logger:
     def getlogger(self):
         return self._logger
 
-# logger=Logger(filename='test.log',level='DEBUG').getlogger()
-# while True:
-#     logger.debug('😊')
-#     time.sleep(1)
-#     logger.info('ABC')
+#使用配置文件配置日志
+class Loggingyaml(object):
+    def __init__(self,
+    default_name='logging_config.yaml',
+    default_folder=r'./'):
+        self.default_path=default_folder+default_name
+
+    def loggerin(self):
+        with open(self.default_path,'r',encoding='utf-8') as lgo:
+            logging_config=yaml.safe_load(lgo)
+        logging.config.dictConfig(logging_config)
+        logger=logging.getLogger('app')
+        return logger
+            
+# logb=Loggingyaml().loggerin()
+# logb.debug('这是一条debug日志')
+# logb.info('info日志')
