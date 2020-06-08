@@ -1,0 +1,10 @@
+Environment:
+  PRD:
+    DingDingWebHook: ddw
+    https: https
+  PRE:
+    DingDingWebHook: ddw
+    https: https
+Username:
+  name: username
+  psd: password
