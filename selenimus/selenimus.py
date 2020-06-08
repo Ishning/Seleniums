@@ -47,7 +47,7 @@ def webdrivers(infos,userinfo):
     time.sleep(5)
 
     times=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
-    screnhost_name='%s.png' % times
+    screnhost_name='%a-%s.png' % ,times
     driver.save_screenshot(screnhost_name)
 
 
