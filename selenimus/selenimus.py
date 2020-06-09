@@ -1,6 +1,7 @@
 import os
 import os.path
 import time
+import sys
 
 import yaml
 from selenium import webdriver
@@ -15,42 +16,64 @@ logs=Loggingyaml().loggerin()
 default_yaml=Selenimu_Yaml().file_judge()
 
 def useyamls():
-    Environment=default_yaml['Environment']
+    try:
+        Environment=default_yaml['Environment']
+    except (TypeError,OSError,ValueError) as errinfo:
+        logs.error(errinfo)
+        logs.info('配置未正确，已退出。请确认配置后运行')
+        sys.exit(0)
+    
     for i in range(0,len(Environment)+1):
         envs=list(Environment.keys())[i]
         env_info=Environment[envs]
-        webdrivers(env_info['https'],default_yaml['Username'])
+        webdrivers(envs,env_info['Https'],default_yaml['Username'])
         print(i)
 
 
-def webdrivers(infos,userinfo):
+def webdrivers(envs,infos,userinfo):
     # chrome模式
-    chromedriver_path=r''
+    # chromedriver_path=r''
     
-    chrome_options=Options()
-    #无界面模式
-    chrome_options.add_argument('headless')
+    # chrome_options=Options()
+    # #无界面模式
+    # chrome_options.add_argument('headless')
 
-    drivers=webdriver.Chrome(chromedriver_path,chrome_options=chrome_options)
-    drivers.get(infos)
+    # drivers=webdriver.Chrome(chromedriver_path,chrome_options=chrome_options)
+    # drivers.get(infos)
 
     # safari测试
-    # driver=webdriver.Safari()
-    # driver.get("")
+    drivers=webdriver.Safari()
+    drivers.get(infos)
     
-    username=driver.find_element_by_name('username')
+    #键入用户名和密码
+    username=drivers.find_element_by_name('username')
     username.send_keys(userinfo['name'])
-    password=driver.find_element_by_id('inputPassword')
+    password=drivers.find_element_by_id('inputPassword')
     password.send_keys(userinfo['pw'])
-    driver.find_element_by_id('inputPassword').send_keys(Keys.ENTER)
+    drivers.find_element_by_id('inputPassword').send_keys(Keys.ENTER)
 
     time.sleep(5)
 
+    #设置大小
+    width=drivers.execute_script('return document.documentElement.scrollWidth')
+    height=drivers.execute_script('return document.documentElement.scrollHeight')
+    drivers.set_window_size(width,height)
+    time.sleep(1)
+
     times=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())
-    screnhost_name='%a-%s.png' % times
-    driver.save_screenshot(screnhost_name)
+    screnhost_name='%s-%s.png' % (envs,times)
+    logs.info('已获取截图:%s',screnhost_name)
+    
+    
 
 
-useyamls()
+    abc=r'./Screenshots/%s-%s.png' % (envs,times)
+    drivers.save_screenshot(abc)
+    # drivers.get_screenshot_as_file(abc)
+    drivers.close()
 
-print('😀😃')
+
+try:
+    useyamls()
+except BaseException as oser:
+    logs.error(oser)
