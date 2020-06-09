@@ -3,7 +3,7 @@ import yaml
 
 from logs import Loggingyaml
 
-# logs=Loggingyaml().loggerin()
+loggs=Loggingyaml().loggerin()
 
 class Selenimu_Yaml(object):
     def __init__(self,
@@ -17,18 +17,18 @@ class Selenimu_Yaml(object):
         isExists=os.path.exists(self.fileyamlname)
         if not isExists:
             try:
-                dict_var={"Environment": {"env": {"https": "https1","DingDingWebHook": "dwebh1"},"env1": {"https": "https2","DingDingWebHook": "dwebh2"}},"Username": {"name": "username","pw": "password"}}
+                dict_var={"Environment": {"Env": {"Https": "https1","DingDingWebHook": "dwebh1","Title":"This is an example"},"Env1": {"Https": "https2","DingDingWebHook": "dwebh2","Title":"This is an example"}},"Username": {"name": "username","pw": "password"}}
                 with open(self.file_path,'w',encoding='utf-8') as wf:
                     yaml.dump(dict_var,wf,default_flow_style=False)
-                # logger.info('已创建traffic.yaml')
+                loggs.info('已创建默认配置文件，请修改')
             except OSError:
-                pass
+                loggs.error(OSError)
         elif isExists:
             try:
                 with open(self.file_path,encoding='utf-8') as rf:
                     yamlload=yaml.safe_load(rf)
-                # logs.debug('已读取traffic.yaml')
+                loggs.debug('已读取traffic.yaml')
                 return yamlload
             except OSError:
-                pass
+                loggs.error(OSError)
     
