@@ -1,7 +1,7 @@
 import os
 import yaml
 
-from logs import Loggingyaml
+from loggings import Loggingyaml
 
 loggs=Loggingyaml().loggerin()
 
