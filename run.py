@@ -2,8 +2,7 @@ import getopt
 import os
 import sys
 
-from selenimus import loggings
-# from selenimus import selenimu
+from selenimus import loggings,selenimu
 
 # import selenimus
 

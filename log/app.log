@@ -1,0 +1,6 @@
+[DEBUG] - 2020-06-11 10:26:35,391 - app - /Users/enma/Documents/selenium/selenimus/yamls.py[line:30] : 已读取traffic.yaml
+[ERROR] - 2020-06-11 10:26:38,232 - app - /Users/enma/Documents/selenium/selenimus/selenimu.py[line:58] : 网址错误，请确认.Message: Could not parse requested URL 'https1'
+
+[ERROR] - 2020-06-11 10:26:39,832 - app - /Users/enma/Documents/selenium/selenimus/selenimu.py[line:58] : 网址错误，请确认.Message: Could not parse requested URL 'https2'
+
+[ERROR] - 2020-06-11 10:26:42,226 - app - /Users/enma/Documents/selenium/selenimus/selenimu.py[line:101] : list index out of range
