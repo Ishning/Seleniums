@@ -95,7 +95,7 @@ def webdrivers(envs,infos,userinfo):
     drivers.close()
 
 
-try:
-    useyamls()
-except BaseException as oser:
-    logs.error(oser)
+# try:
+#     useyamls()
+# except BaseException as oser:
+#     logs.error(oser)
