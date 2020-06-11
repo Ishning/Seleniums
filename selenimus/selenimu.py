@@ -23,11 +23,10 @@ def useyamls():
         logs.info('配置未正确，已退出。请确认配置后运行')
         sys.exit(0)
     
-    for i in range(0,len(Environment)+1):
+    for i in range(0,len(Environment)):
         envs=list(Environment.keys())[i]
         env_info=Environment[envs]
         webdrivers(envs,env_info['Https'],default_yaml['Username'])
-        print(i)
 
 def directory():
     floder=r'./Screenshots'
@@ -66,16 +65,15 @@ def webdrivers(envs,infos,userinfo):
         password=drivers.find_element_by_id('inputPassword')
         password.send_keys(userinfo['pw'])
         drivers.find_element_by_id('inputPassword').send_keys(Keys.ENTER)
+
+        time.sleep(5)
     except BaseException as be:
         logs.error('selenium.common.exceptions.NoSuchElementException:%s,未能找到相关页面元素，只截当前图',be)
-        return None      
     # username=drivers.find_element_by_name('username')
     # username.send_keys(userinfo['name'])
     # password=drivers.find_element_by_id('inputPassword')
     # password.send_keys(userinfo['pw'])
     # drivers.find_element_by_id('inputPassword').send_keys(Keys.ENTER)
-
-    time.sleep(5)
 
     #设置大小
     width=drivers.execute_script('return document.documentElement.scrollWidth')
@@ -96,6 +94,6 @@ def webdrivers(envs,infos,userinfo):
 
 
 # try:
-#     useyamls()
+    # useyamls()
 # except BaseException as oser:
 #     logs.error(oser)

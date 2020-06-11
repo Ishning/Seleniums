@@ -5,11 +5,8 @@ import sys
 from selenimus import loggings
 from selenimus import selenimu
 
-print('start')
 logs=loggings.Loggingyaml()
-
 largv=list(sys.argv)
-sys.path
 
 def main():
     if len(largv)==1:
