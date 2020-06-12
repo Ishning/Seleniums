@@ -13,6 +13,7 @@ class Selenimu_Yaml(object):
 
         self.file_path=self.folder_name+self.fileyamlname
     
+    @property
     def file_judge(self):
         isExists=os.path.exists(self.fileyamlname)
         if not isExists:
@@ -21,14 +22,14 @@ class Selenimu_Yaml(object):
                 with open(self.file_path,'w',encoding='utf-8') as wf:
                     yaml.dump(dict_var,wf,default_flow_style=False)
                 loggs.info('已创建默认配置文件，请修改')
-            except OSError:
-                loggs.error(OSError)
+            except BaseException as be:
+                loggs.error(be)
         elif isExists:
             try:
                 with open(self.file_path,encoding='utf-8') as rf:
                     yamlload=yaml.safe_load(rf)
                 loggs.debug('已读取traffic.yaml')
                 return yamlload
-            except OSError:
-                loggs.error(OSError)
+            except BaseException as be:
+                loggs.error(be)
     
