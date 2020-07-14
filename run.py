@@ -1,5 +1,6 @@
 import os
 import sys
+import click
 
 from selenimus import loggings
 from selenimus import selenimu
@@ -32,6 +33,12 @@ def main():
     #         # return None
     #     except BaseException as oser:
     #         logs.error(oser)
+
+    @click.command()
+    @click.option('-s',help="start selemimus",default='-s')
+    @click.option('-t',help='检查',default=None)
+    def test():
+        print('test')
 
     if len(largv)==1:
         print('-s 启动运行\n-t 检查')
